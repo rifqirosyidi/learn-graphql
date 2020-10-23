@@ -1,5 +1,9 @@
+require('dotenv').config()
+
+
 const graphql = require("graphql");
 const _ = require('lodash')
+const mongoose = require('mongoose')
 const {
    GraphQLObjectType,
    GraphQLString, 
@@ -8,6 +12,14 @@ const {
    GraphQLInt,
    GraphQLList
   } = graphql;
+
+
+mongoose.connect(process.env.DB_CONN, 
+{ useNewUrlParser: true, useUnifiedTopology: true })
+mongoose.connection.once('open', () => {
+  console.log("Connected")
+})
+
 
 // dummy data
  let books = [
